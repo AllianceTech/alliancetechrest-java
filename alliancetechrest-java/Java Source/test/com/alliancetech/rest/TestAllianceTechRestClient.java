@@ -1,6 +1,8 @@
 package test.com.alliancetech.rest;
 
+import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Properties;
 
 import junit.framework.TestCase;
 
@@ -253,6 +255,7 @@ public class TestAllianceTechRestClient extends TestCase
 	{
 		// Call the API to post the registant
 		RegistrantResponseList laRegResponseList = laClient.postRegistrantList(aaRegList);
+		System.out.println(laRegResponseList.toString());
 		// Loop through the responses
 		for (RegistrantResponse laRegResponse : laRegResponseList.getResponseList())
 		{
@@ -266,7 +269,13 @@ public class TestAllianceTechRestClient extends TestCase
 	@Before
 	public void setUp() throws Exception
 	{
-		laClient = new AllianceTechRestClient("username", "password", "http://domain.com");
+		InputStream laFileServer = TestAllianceTechRestClient.class.getClassLoader()
+				.getResourceAsStream("creds.properties");
+		Properties laServerPrp = new Properties();
+		laServerPrp.load(laFileServer);
+
+		laClient = new AllianceTechRestClient(laServerPrp.getProperty("username"),
+				laServerPrp.getProperty("password"), laServerPrp.getProperty("api"));
 	}
 
 	@After
@@ -276,26 +285,154 @@ public class TestAllianceTechRestClient extends TestCase
 	}
 
 	/**
-	 * Tests the association delete API. This will test the BULK and the
-	 * single record delete.
+	 * Tests the association BULK delete API.
 	 */
 	@Test
 	@Ignore
-	public void test_AssociationListDelete()
+	public void test_AssociationListBulkDelete()
 	{
 		int liNumOfRecs = 3;
-		AssociationList laAssocList = associationListPost(liNumOfRecs);
-		// Single Delete
-		Association laSingleDel = laAssocList.getAssociationList().remove(0);
+		// Setup
+		AssociationList laAssocListData = associationListPost(liNumOfRecs);
+		// End Setup
+
+		// Bulk Delete
+		DefaultResponse laResponse = laClient
+				.postBulkDeleteAssociationList(laAssocListData);
+		Assert.assertEquals(laResponse.getStatus(), "SUCCESS");
+
+		// Verify
+		for (Association laAssoc : laAssocListData.getAssociationList())
+		{
+			AssociationList laAssocList = laClient.getAssociation(laAssoc.getEpc(),
+					AllianceTechRestClient.ID_TYPE_EPC);
+			Assert.assertNotNull(laAssocList);
+			Assert.assertNotNull(laAssocList.getAssociationList());
+			Assert.assertTrue(laAssocList.getAssociationList().size() == 0);
+		}
+		// Nothing to clean up
+	}
+
+	/**
+	 * Tests the association delete API by registrant num.
+	 */
+	@Test
+	@Ignore
+	public void test_AssociationListDeleteByRegNum()
+	{
+		int liNumOfRecs = 1;
+		// Setup
+		AssociationList laAssocListData = associationListPost(liNumOfRecs);
+		// End Setup
+
+		// Delete by Reg Num
+		Association laSingleDel = laAssocListData.getAssociationList().remove(0);
 		Assert.assertNotNull(laSingleDel);
 		DefaultResponse laResponse = laClient.deleteAssociation(
 				laSingleDel.getRegistrantNum(), AllianceTechRestClient.ID_TYPE_NUM);
-		System.out.println(laResponse.toString());
 		Assert.assertEquals(laResponse.getStatus(), "SUCCESS");
-		// Multi-Delete
-		laResponse = laClient.postBulkDeleteAssociationList(laAssocList);
-		System.out.println(laResponse.toString());
+
+		// Verify
+		AssociationList laAssocList = laClient.getAssociation(
+				laSingleDel.getRegistrantNum(), AllianceTechRestClient.ID_TYPE_NUM);
+		Assert.assertNotNull(laAssocList);
+		Assert.assertNotNull(laAssocList.getAssociationList());
+		Assert.assertTrue(laAssocList.getAssociationList().size() == 0);
+
+		// Nothing to clean up
+	}
+
+	/**
+	 * Tests the association delete API by EPC.
+	 */
+	@Test
+	@Ignore
+	public void test_AssociationListDeleteByEPC()
+	{
+		int liNumOfRecs = 1;
+		// Setup
+		AssociationList laAssocListData = associationListPost(liNumOfRecs);
+		// End Setup
+
+		// Delete by EPC
+		Association laSingleDel = laAssocListData.getAssociationList().remove(0);
+		Assert.assertNotNull(laSingleDel);
+		DefaultResponse laResponse = laClient.deleteAssociation(laSingleDel.getEpc(),
+				AllianceTechRestClient.ID_TYPE_EPC);
 		Assert.assertEquals(laResponse.getStatus(), "SUCCESS");
+
+		// Verify
+		AssociationList laAssocList = laClient.getAssociation(laSingleDel.getEpc(),
+				AllianceTechRestClient.ID_TYPE_EPC);
+		Assert.assertNotNull(laAssocList);
+		Assert.assertNotNull(laAssocList.getAssociationList());
+		Assert.assertTrue(laAssocList.getAssociationList().size() == 0);
+
+		// Nothing to clean up
+	}
+
+	/**
+	 * Tests the association delete API by EPC but without the id_type..
+	 */
+	@Test
+	@Ignore
+	public void test_AssociationListDeleteByEPCNoIdType()
+	{
+		int liNumOfRecs = 1;
+		// Setup
+		AssociationList laAssocListData = associationListPost(liNumOfRecs);
+		// End Setup
+
+		// Delete by EPC
+		Association laSingleDel = laAssocListData.getAssociationList().remove(0);
+		Assert.assertNotNull(laSingleDel);
+		DefaultResponse laResponse = laClient.deleteAssociation(laSingleDel.getEpc(),
+				null);
+		Assert.assertEquals(laResponse.getStatus(), "SUCCESS");
+
+		// Verify
+		AssociationList laAssocList = laClient.getAssociation(laSingleDel.getEpc(), null);
+		Assert.assertNotNull(laAssocList);
+		Assert.assertNotNull(laAssocList.getAssociationList());
+		Assert.assertTrue(laAssocList.getAssociationList().size() == 0);
+
+		// Nothing to clean up
+	}
+
+	/**
+	 * Tests the association delete API by ID.
+	 */
+	@Test
+	@Ignore
+	public void test_AssociationListDeleteByID()
+	{
+		int liNumOfRecs = 1;
+		// Setup
+		AssociationList laAssocListData = associationListPost(liNumOfRecs);
+		// End Setup
+
+		Association laSingleDel = laAssocListData.getAssociationList().remove(0);
+		AssociationList laAssocList = laClient.getAssociation(
+				laSingleDel.getRegistrantNum(), AllianceTechRestClient.ID_TYPE_NUM);
+		Assert.assertNotNull(laAssocList);
+		Assert.assertNotNull(laAssocList.getAssociationList());
+		Assert.assertTrue(laAssocList.getAssociationList().size() == 1);
+
+		// Delete by EPC
+		laSingleDel = laAssocList.getAssociationList().remove(0);
+		Assert.assertNotNull(laSingleDel);
+		DefaultResponse laResponse = laClient.deleteAssociation(laSingleDel.getId(),
+				AllianceTechRestClient.ID_TYPE_ID);
+		Assert.assertEquals(laResponse.getStatus(), "SUCCESS");
+
+		// Verify
+		laAssocList = laClient.getAssociation(laSingleDel.getId(),
+				AllianceTechRestClient.ID_TYPE_ID);
+		Assert.assertNotNull(laAssocList);
+		Assert.assertNotNull(laAssocList.getAssociationList());
+		Assert.assertTrue(laAssocList.getAssociationList().size() == 0);
+
+		// Nothing to clean up
 	}
 
 	/**
@@ -334,7 +471,7 @@ public class TestAllianceTechRestClient extends TestCase
 	 * epc.
 	 */
 	@Test
-	// @Ignore
+	@Ignore
 	public void test_AssociationSingleFetchByEPC()
 	{
 		AssociationList laAssocListData = genAssocData(1);
@@ -357,7 +494,7 @@ public class TestAllianceTechRestClient extends TestCase
 						AllianceTechRestClient.ID_TYPE_EPC);
 		Assert.assertNotNull(laAssocList);
 		Assert.assertNotNull(laAssocList.getAssociationList());
-		Assert.assertTrue(laAssocList.getAssociationList().size() > 0);
+		Assert.assertTrue(laAssocList.getAssociationList().size() == 1);
 		Assert.assertEquals(laAssocList.getAssociationList().get(0).getEpc(),
 				laAssocListData.getAssociationList().get(0).getEpc());
 
@@ -374,7 +511,7 @@ public class TestAllianceTechRestClient extends TestCase
 	 * the ID typed if you don't pass one.
 	 */
 	@Test
-	// @Ignore
+	@Ignore
 	public void test_AssociationSingleFetchByEPCNoIdType()
 	{
 		AssociationList laAssocListData = genAssocData(1);
@@ -395,7 +532,7 @@ public class TestAllianceTechRestClient extends TestCase
 				.getAssociationList().get(0).getEpc(), null);
 		Assert.assertNotNull(laAssocList);
 		Assert.assertNotNull(laAssocList.getAssociationList());
-		Assert.assertTrue(laAssocList.getAssociationList().size() > 0);
+		Assert.assertTrue(laAssocList.getAssociationList().size() == 1);
 		Assert.assertEquals(laAssocList.getAssociationList().get(0).getEpc(),
 				laAssocListData.getAssociationList().get(0).getEpc());
 
@@ -410,7 +547,7 @@ public class TestAllianceTechRestClient extends TestCase
 	 * of id. This is a good test of both the GET and the DELETE by id.
 	 */
 	@Test
-	// @Ignore
+	@Ignore
 	public void test_AssociationSingleFetchByID()
 	{
 		AssociationList laAssocListData = genAssocData(1);
@@ -433,14 +570,14 @@ public class TestAllianceTechRestClient extends TestCase
 				AllianceTechRestClient.ID_TYPE_NUM);
 		Assert.assertNotNull(laAssocList);
 		Assert.assertNotNull(laAssocList.getAssociationList());
-		Assert.assertTrue(laAssocList.getAssociationList().size() > 0);
+		Assert.assertTrue(laAssocList.getAssociationList().size() == 1);
 		String lsId = laAssocList.getAssociationList().get(0).getId();
 
 		// Now the real test can we get the same record by id.
 		laAssocList = laClient.getAssociation(lsId, AllianceTechRestClient.ID_TYPE_ID);
 		Assert.assertNotNull(laAssocList);
 		Assert.assertNotNull(laAssocList.getAssociationList());
-		Assert.assertTrue(laAssocList.getAssociationList().size() > 0);
+		Assert.assertTrue(laAssocList.getAssociationList().size() == 1);
 		Assert.assertEquals(lsId, laAssocList.getAssociationList().get(0).getId());
 
 		// Cleanup
@@ -452,7 +589,7 @@ public class TestAllianceTechRestClient extends TestCase
 	 * Tests the Association GET API.
 	 */
 	@Test
-	// @Ignore
+	@Ignore
 	public void test_AssociationSingleFetchByRegNum()
 	{
 		AssociationList laAssocListData = genAssocData(1);
@@ -475,7 +612,7 @@ public class TestAllianceTechRestClient extends TestCase
 				AllianceTechRestClient.ID_TYPE_NUM);
 		Assert.assertNotNull(laAssocList);
 		Assert.assertNotNull(laAssocList.getAssociationList());
-		Assert.assertTrue(laAssocList.getAssociationList().size() > 0);
+		Assert.assertTrue(laAssocList.getAssociationList().size() == 1);
 		Assert.assertEquals(laAssocList.getAssociationList().get(0).getRegistrantNum(),
 				laAssocListData.getAssociationList().get(0).getRegistrantNum());
 

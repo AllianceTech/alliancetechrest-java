@@ -1,0 +1,6 @@
+In order to run the unit test you need to include a creds.properties 
+file in this directory with the following entries:
+
+username=username
+password=password
+api=http://domain.com
