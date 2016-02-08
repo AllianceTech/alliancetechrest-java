@@ -16,6 +16,7 @@ import com.alliancetech.rest.data.Profile;
 import com.alliancetech.rest.data.Registrant;
 import com.alliancetech.rest.data.RegistrantList;
 import com.alliancetech.rest.data.RegistrantResponseList;
+import com.alliancetech.rest.data.RoomList;
 import com.alliancetech.rest.data.SessionList;
 import com.alliancetech.rest.data.SessionResponseList;
 
@@ -55,6 +56,7 @@ public class AllianceTechRestClient extends RestUtility
 	private static final String REST_URL_REGISTRATION_BULK_DELETE = "/restapi/registration/bulkdelete";
 	private static final String REST_URL_REGISTRATION_CHECKED_IN_LIST = "/restapi/registration/checked-in-list/";
 	private static final String REST_URL_REGISTRATION_VIEW_BY = "/restapi/registration/viewby";
+	private static final String REST_URL_ROOMS = "/restapi/rooms";
 	private static final String REST_URL_SESSIONS = "/restapi/sessions";
 	private static final String REST_URL_SESSIONS_VIEW_BY = "/restapi/sessions/viewby";
 
@@ -375,6 +377,23 @@ public class AllianceTechRestClient extends RestUtility
 		}
 		return get(RegistrantList.class, REST_URL_REGISTRATION_VIEW_BY + "/" + asViewById
 				+ lsParam);
+	}
+
+	/**
+	 * Gets List of Rooms.
+	 * 
+	 * @param asParam String
+	 * @return RegistrantList
+	 */
+	public RoomList getRoomList(String asLastModified)
+	{
+		String lsParam = "";
+		if (UtilityMethods.isValidString(asLastModified))
+		{
+			lsParam += "?last_modified=" + asLastModified;
+		}
+
+		return get(RoomList.class, REST_URL_ROOMS + lsParam);
 	}
 
 	/**

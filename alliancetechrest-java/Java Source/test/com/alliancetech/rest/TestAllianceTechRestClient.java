@@ -32,6 +32,8 @@ import com.alliancetech.rest.data.Registrant;
 import com.alliancetech.rest.data.RegistrantList;
 import com.alliancetech.rest.data.RegistrantResponse;
 import com.alliancetech.rest.data.RegistrantResponseList;
+import com.alliancetech.rest.data.Room;
+import com.alliancetech.rest.data.RoomList;
 import com.alliancetech.rest.data.Session;
 import com.alliancetech.rest.data.SessionList;
 import com.alliancetech.rest.data.SessionResponse;
@@ -887,6 +889,23 @@ public class TestAllianceTechRestClient extends TestCase
 	{
 		int liNumOfRecs = 1;
 		registrantListPost(genRegData(liNumOfRecs));
+	}
+
+	/**
+	 * Tests the room GET API.
+	 */
+	@Test
+	@Ignore
+	public void test_RoomListGet()
+ {
+		RoomList laRoomList = laClient
+				.getRoomList("2012-01-01-08.00.00.000000");
+		System.out.println(laRoomList.getRoomList().size());
+		if (laRoomList.getRoomList().size() > 0) {
+			for (Room laRoom : laRoomList.getRoomList()) {
+				System.out.println(laRoom.toString());
+			}
+		}
 	}
 
 	/**
