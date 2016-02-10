@@ -19,6 +19,8 @@ import com.alliancetech.rest.data.Association;
 import com.alliancetech.rest.data.AssociationList;
 import com.alliancetech.rest.data.AssociationResponse;
 import com.alliancetech.rest.data.AssociationResponseList;
+import com.alliancetech.rest.data.AttendanceResponse;
+import com.alliancetech.rest.data.AttendanceResponseList;
 import com.alliancetech.rest.data.Attribute;
 import com.alliancetech.rest.data.DefaultResponse;
 import com.alliancetech.rest.data.Image;
@@ -623,6 +625,25 @@ public class TestAllianceTechRestClient extends TestCase
 				laAssocListData.getAssociationList().get(0).getRegistrantNum(),
 				AllianceTechRestClient.ID_TYPE_NUM);
 		Assert.assertEquals(laResponse.getStatus(), "SUCCESS");
+	}
+
+	/**
+	 * Tests the Attendance Response List GET API.
+	 */
+	@Test
+	@Ignore
+	public void test_AttendanceResponseListGet()
+	{
+		AttendanceResponseList laAttRespList = laClient.getAttendanceResponseList(5,
+				"2012-01-01-08.00.00.000000");
+		System.out.println(laAttRespList.getAttendanceResponseList().size());
+		if (laAttRespList.getAttendanceResponseList().size() > 0)
+		{
+			for (AttendanceResponse laAttResp : laAttRespList.getAttendanceResponseList())
+			{
+				System.out.println(laAttResp.toString());
+			}
+		}
 	}
 
 	@Test

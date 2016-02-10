@@ -6,6 +6,7 @@ import java.util.Map;
 import com.alliancetech.rest.data.Association;
 import com.alliancetech.rest.data.AssociationList;
 import com.alliancetech.rest.data.AssociationResponseList;
+import com.alliancetech.rest.data.AttendanceResponseList;
 import com.alliancetech.rest.data.DefaultResponse;
 import com.alliancetech.rest.data.ImageList;
 import com.alliancetech.rest.data.MaterialsRedemptionList;
@@ -48,6 +49,7 @@ public class AllianceTechRestClient extends RestUtility
 	public static final String RESPONSE_STATUS_SUCCESS = "SUCCESS";
 	private static final String REST_URL_ASSOCIATION_BULK_DELETE = "/restapi/association/bulkdelete";
 	private static final String REST_URL_ASSOCIATIONS = "/restapi/associations";
+	private static final String REST_URL_ATTENDANCE = "/restapi/attendance";
 	private static final String REST_URL_IMAGES = "/restapi/images";
 	private static final String REST_URL_MATERIALS = "/restapi/materials";
 	private static final String REST_URL_PERSONAL_EVENTS = "/restapi/personalevents/";
@@ -205,6 +207,33 @@ public class AllianceTechRestClient extends RestUtility
 		}
 
 		return get(AssociationList.class, REST_URL_ASSOCIATIONS + lsParam);
+	}
+
+	/**
+	 * Gets List of attendance.
+	 * 
+	 * @param aiMaxSize int
+	 * @param asLastModified String
+	 * @return AttendanceList
+	 */
+	public AttendanceResponseList getAttendanceResponseList(int aiMaxSize, String asLastModified)
+	{
+		String lsParam = "";
+		if (aiMaxSize > 0)
+		{
+			lsParam += "&max_size=" + Integer.toString(aiMaxSize);
+		}
+		if (UtilityMethods.isValidString(asLastModified))
+		{
+			lsParam += "&last_modified=" + asLastModified;
+		}
+
+		if (UtilityMethods.isValidString(lsParam))
+		{
+			lsParam = lsParam.replaceFirst("&", "?");
+		}
+
+		return get(AttendanceResponseList.class, REST_URL_ATTENDANCE + lsParam);
 	}
 
 	/**
