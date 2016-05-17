@@ -42,6 +42,14 @@ public class Attribute
 	}
 
 	/**
+	 * default constructor in order to serialize with jackson-json
+	 * see http://stackoverflow.com/questions/7625783/jsonmappingexception-no-suitable-constructor-found-for-type-simple-type-class
+	 */
+	public Attribute() {
+
+	}
+
+	/**
      * Gets the id.
      * 
      * @return String
