@@ -1,45 +1,15 @@
 package test.com.alliancetech.rest;
 
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Properties;
-
+import com.alliancetech.rest.AllianceTechRestClient;
+import com.alliancetech.rest.data.*;
 import junit.framework.TestCase;
-
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.*;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
-import com.alliancetech.rest.AllianceTechRestClient;
-import com.alliancetech.rest.data.Association;
-import com.alliancetech.rest.data.AssociationList;
-import com.alliancetech.rest.data.AssociationResponse;
-import com.alliancetech.rest.data.AssociationResponseList;
-import com.alliancetech.rest.data.AttendanceResponse;
-import com.alliancetech.rest.data.AttendanceResponseList;
-import com.alliancetech.rest.data.Attribute;
-import com.alliancetech.rest.data.DefaultResponse;
-import com.alliancetech.rest.data.Image;
-import com.alliancetech.rest.data.ImageList;
-import com.alliancetech.rest.data.PersonalEvent;
-import com.alliancetech.rest.data.PersonalEventList;
-import com.alliancetech.rest.data.PersonalEventResponse;
-import com.alliancetech.rest.data.PersonalEventResponseList;
-import com.alliancetech.rest.data.Profile;
-import com.alliancetech.rest.data.Registrant;
-import com.alliancetech.rest.data.RegistrantList;
-import com.alliancetech.rest.data.RegistrantResponse;
-import com.alliancetech.rest.data.RegistrantResponseList;
-import com.alliancetech.rest.data.Room;
-import com.alliancetech.rest.data.RoomList;
-import com.alliancetech.rest.data.Session;
-import com.alliancetech.rest.data.SessionList;
-import com.alliancetech.rest.data.SessionResponse;
-import com.alliancetech.rest.data.SessionResponseList;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Properties;
 
 /*
  * AlliancetechTechRestClientTest.java
@@ -274,7 +244,7 @@ public class TestAllianceTechRestClient extends TestCase
 	public void setUp() throws Exception
 	{
 		InputStream laFileServer = TestAllianceTechRestClient.class.getClassLoader()
-				.getResourceAsStream("creds.properties");
+				.getResourceAsStream("cfg/creds.properties");
 		Properties laServerPrp = new Properties();
 		laServerPrp.load(laFileServer);
 
@@ -992,6 +962,20 @@ public class TestAllianceTechRestClient extends TestCase
 			SessionResponse laSessionResponse = (SessionResponse) laSessionResponseList
 					.getResponseList().get(i);
 			System.out.println("Response: " + laSessionResponse.getStatus());
+		}
+	}
+
+	/**
+	 * Tests the GET Survey Completion.
+	 */
+	@Test
+	public void test_SurveyCompletionGet() {
+		SurveyCompletionList laSurveyCompletions = laClient.getSurveyCompletions("20160226060916990275000000", "00456799");
+		System.out.println(laSurveyCompletions.getSurveyCompletionList().size());
+		if (laSurveyCompletions.getSurveyCompletionList().size() > 0) {
+			for (SurveyCompletion laSurveyCompletion : laSurveyCompletions.getSurveyCompletionList()) {
+				System.out.println(laSurveyCompletion.toString());
+			}
 		}
 	}
 }

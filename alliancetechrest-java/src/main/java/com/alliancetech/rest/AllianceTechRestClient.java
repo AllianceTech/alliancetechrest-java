@@ -3,23 +3,7 @@ package com.alliancetech.rest;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.alliancetech.rest.data.Association;
-import com.alliancetech.rest.data.AssociationList;
-import com.alliancetech.rest.data.AssociationResponseList;
-import com.alliancetech.rest.data.AttendanceResponseList;
-import com.alliancetech.rest.data.DefaultResponse;
-import com.alliancetech.rest.data.ImageList;
-import com.alliancetech.rest.data.MaterialsRedemptionList;
-import com.alliancetech.rest.data.MaterialsRedemptionResponseList;
-import com.alliancetech.rest.data.PersonalEventList;
-import com.alliancetech.rest.data.PersonalEventResponseList;
-import com.alliancetech.rest.data.Profile;
-import com.alliancetech.rest.data.Registrant;
-import com.alliancetech.rest.data.RegistrantList;
-import com.alliancetech.rest.data.RegistrantResponseList;
-import com.alliancetech.rest.data.RoomList;
-import com.alliancetech.rest.data.SessionList;
-import com.alliancetech.rest.data.SessionResponseList;
+import com.alliancetech.rest.data.*;
 
 /**
  * Alliance Tech REST API client
@@ -61,6 +45,7 @@ public class AllianceTechRestClient extends RestUtility
 	private static final String REST_URL_ROOMS = "/restapi/rooms";
 	private static final String REST_URL_SESSIONS = "/restapi/sessions";
 	private static final String REST_URL_SESSIONS_VIEW_BY = "/restapi/sessions/viewby";
+	private static final String REST_URL_SURVEY_COMPLETION = "/restapi/survey/completions/";
 
 	/**
 	 * Constructor.
@@ -479,6 +464,29 @@ public class AllianceTechRestClient extends RestUtility
 
 		return get(SessionList.class, REST_URL_SESSIONS_VIEW_BY + "/" + asViewById
 				+ lsParam);
+	}
+
+	/**
+	 * Gets the list of survey completions for a specific survey or registrant.
+	 *
+	 * @param asSurveyId String
+	 * @param asRegId String
+	 * @return SurveyCompletionList
+	 */
+	public SurveyCompletionList getSurveyCompletions(String asSurveyId, String asRegId)
+	{
+		String lsParam = "";
+		if (UtilityMethods.isValidString(asSurveyId))
+		{
+			lsParam += asSurveyId;
+		}
+
+		if (UtilityMethods.isValidString(asRegId))
+		{
+			lsParam += "/" + asRegId;
+		}
+
+		return get(SurveyCompletionList.class, REST_URL_SURVEY_COMPLETION + lsParam);
 	}
 
 	/**
