@@ -969,6 +969,7 @@ public class TestAllianceTechRestClient extends TestCase
 	 * Tests the GET Survey Completion.
 	 */
 	@Test
+	@Ignore
 	public void test_SurveyCompletionGet() {
 		SurveyCompletionList laSurveyCompletions = laClient.getSurveyCompletions("20160226060916990275000000", "00456799");
 		System.out.println(laSurveyCompletions.getSurveyCompletionList().size());
