@@ -34,6 +34,7 @@ public class AllianceTechRestClient extends RestUtility
 	private static final String REST_URL_ASSOCIATION_BULK_DELETE = "/restapi/association/bulkdelete";
 	private static final String REST_URL_ASSOCIATIONS = "/restapi/associations";
 	private static final String REST_URL_ATTENDANCE = "/restapi/attendance";
+	private static final String REST_URL_ATTENDANCE_READS = "/restapi/attendance/reads";
 	private static final String REST_URL_IMAGES = "/restapi/images";
 	private static final String REST_URL_MATERIALS = "/restapi/materials";
 	private static final String REST_URL_PERSONAL_EVENTS = "/restapi/personalevents/";
@@ -52,8 +53,6 @@ public class AllianceTechRestClient extends RestUtility
 	 * 
 	 * @param asUsername String
 	 * @param asPassword String
-	 * @param asEventTag String
-	 * @param asDomain String
 	 */
 	public AllianceTechRestClient(String asUsername, String asPassword, String asHostname)
 	{
@@ -105,7 +104,7 @@ public class AllianceTechRestClient extends RestUtility
 			}
 			else
 			{
-				lsParam = "?delete_all=" + new Boolean(abDeleteAll).toString();
+				lsParam = "?delete_all=" + Boolean.toString(abDeleteAll);
 			}
 		}
 		else
@@ -121,7 +120,7 @@ public class AllianceTechRestClient extends RestUtility
 	 * Used to delete and individual Registrant. The ID can be
 	 * registrant num, registrant id, or customer registrant id.
 	 * 
-	 * @param asAttendeeNumber String
+	 * @param asId String
 	 * @return Profile
 	 */
 	public DefaultResponse deleteRegistrant(String asId)
@@ -155,10 +154,8 @@ public class AllianceTechRestClient extends RestUtility
 			lhtParameters.put(PARAM_ID_TYPE, encode(asIdType));
 		}
 
-		AssociationList laRegList = get(AssociationList.class, REST_URL_ASSOCIATIONS
+		return get(AssociationList.class, REST_URL_ASSOCIATIONS
 				+ "/" + encode(asId), lhtParameters);
-
-		return laRegList;
 	}
 
 	/**
@@ -195,11 +192,44 @@ public class AllianceTechRestClient extends RestUtility
 	}
 
 	/**
+	 * Gets List of Reads
+	 *
+	 * @param aiMaxSize int Max number of results to return
+	 * @param asLastId String the ID of the record to continue from
+	 * @param asRoom String The name of the Room to get IDs from (Optional)
+	 * @return AttendanceReadList
+	 */
+	public AttendanceReadList getAttendanceReadList(int aiMaxSize, String asLastId, String asRoom)
+	{
+		String lsParam = "";
+		if (aiMaxSize > 0)
+		{
+			lsParam += "&max_size=" + Integer.toString(aiMaxSize);
+		}
+		if (UtilityMethods.isValidString(asLastId))
+		{
+			lsParam += "&last_id=" + asLastId;
+		}
+
+		if (UtilityMethods.isValidString(lsParam))
+		{
+			lsParam = lsParam.replaceFirst("&", "?");
+		}
+
+		String lsUrl = REST_URL_ATTENDANCE_READS;
+		if( UtilityMethods.isValidString(asRoom)){
+			lsUrl += "/" + asRoom;
+		}
+
+		return get(AttendanceReadList.class, lsUrl + lsParam);
+	}
+
+	/**
 	 * Gets List of attendance.
 	 * 
 	 * @param aiMaxSize int
 	 * @param asLastModified String
-	 * @return AttendanceList
+	 * @return AttendanceResponse*List
 	 */
 	public AttendanceResponseList getAttendanceResponseList(int aiMaxSize, String asLastModified)
 	{
@@ -342,8 +372,9 @@ public class AllianceTechRestClient extends RestUtility
 
 	/**
 	 * Gets List of Registrant.
-	 * 
-	 * @param asParam String
+	 *
+	 * @param aiMaxSize int
+	 * @param asLastModified String
 	 * @return RegistrantList
 	 */
 	public RegistrantList getRegistrantList(int aiMaxSize, String asLastModified)
@@ -368,8 +399,10 @@ public class AllianceTechRestClient extends RestUtility
 
 	/**
 	 * Get detail of Registrant.
-	 * 
-	 * @param asParam String (num, customerId, email)
+	 *
+	 * @param asViewById String
+	 * @param asLastModified String (num, customerId, email)
+	 * @param aiMaxSize int
 	 * @return RegistrantList
 	 */
 	public RegistrantList getRegistrantViewBy(String asViewById, String asLastModified,
@@ -396,7 +429,7 @@ public class AllianceTechRestClient extends RestUtility
 	/**
 	 * Gets List of Rooms.
 	 * 
-	 * @param asParam String
+	 * @param asLastModified String
 	 * @return RegistrantList
 	 */
 	public RoomList getRoomList(String asLastModified)
@@ -414,7 +447,8 @@ public class AllianceTechRestClient extends RestUtility
 	 * Gets List of Sessions. Format of last modified is:
 	 * 2011-01-25-15.36.43.023001
 	 * 
-	 * @param asParam String
+	 * @param asLastModified String
+	 * @param aiMaxSize int
 	 * @return SessionList
 	 */
 	public SessionList getSessions(String asLastModified, int aiMaxSize)
@@ -440,8 +474,10 @@ public class AllianceTechRestClient extends RestUtility
 	/**
 	 * Gets List of Sessions. Format of last modified is:
 	 * 2011-01-25-15.36.43.023001
-	 * 
-	 * @param asParam String
+	 *
+	 * @param asViewById String
+	 * @param asLastModified String
+	 * @param aiMaxSize int
 	 * @return SessionList
 	 */
 	public SessionList getSessionsViewBy(String asViewById, String asLastModified,
