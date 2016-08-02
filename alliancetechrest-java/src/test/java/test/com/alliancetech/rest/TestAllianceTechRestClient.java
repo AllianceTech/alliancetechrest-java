@@ -616,6 +616,24 @@ public class TestAllianceTechRestClient extends TestCase
 		}
 	}
 
+	/**
+	 * Tests the Attendance Read GET API.
+	 */
+	@Test
+	@Ignore
+	public void test_AttendanceReadListGet()
+	{
+		AttendanceReadList laReadList = laClient.getAttendanceReadList(5,
+				null, null);
+		if (laReadList.getAttendanceReadList().size() > 0)
+		{
+			for (AttendanceRead laRead : laReadList.getAttendanceReadList())
+			{
+				System.out.println(laRead.toString());
+			}
+		}
+	}
+
 	@Test
 	@Ignore
 	public void test_ImagesGetAllImages()
