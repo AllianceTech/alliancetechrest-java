@@ -1,9 +1,9 @@
 package com.alliancetech.rest.data;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import com.google.gson.annotations.SerializedName;
 
 /*
  * Room.java
@@ -19,162 +19,160 @@ import com.google.gson.annotations.SerializedName;
 
 /**
  * Room Data.
- * 
- * @version Ver 1.0 February 2, 2016
+ *
  * @author John Ralph <br>
  *         Creation Date: February 2, 2016 10:38:52 PM
+ * @version Ver 1.0 February 2, 2016
  */
 public class Room {
-	@SerializedName("attrList")
-	private List<Attribute> caAttributes = new ArrayList<Attribute>();
+    @SerializedName("attrList")
+    private List<Attribute> caAttributes = new ArrayList<Attribute>();
 
-	@SerializedName("capacity")
-	private int ciOrder; // Capacity
+    @SerializedName("capacity")
+    private int ciOrder; // Capacity
 
-	@SerializedName("attributeId")
-	private String csAttributeId;
+    @SerializedName("attributeId")
+    private String csAttributeId;
 
-	@SerializedName("descr")
-	private String csDescr;
+    @SerializedName("descr")
+    private String csDescr;
 
-	@SerializedName("lastModified")
-	private String csLastModified;
+    @SerializedName("lastModified")
+    private String csLastModified;
 
-	@SerializedName("name")
-	private String csName;
+    @SerializedName("name")
+    private String csName;
 
-	/**
-	 * Gets the attributeId.
-	 * 
-	 * @return String
-	 */
-	public String getAttributeId() {
-		return csAttributeId;
-	}
-	/**
-	 * Get the list of attributes.
-	 * 
-	 * @return List<Attribute>
-	 */
-	public List<Attribute> getAttributes() {
-		return caAttributes;
-	}
-	/**
-	 * Gets the descr.
-	 * 
-	 * @return String
-	 */
-	public String getDescr() {
-		return csDescr;
-	}
-	/**
-	 * Gets the lastModified.
-	 * 
-	 * @return String
-	 */
-	public String getLastModified() {
-		return csLastModified;
-	}
-	/**
-	 * Gets the name.
-	 * 
-	 * @return String
-	 */
-	public String getName() {
-		return csName;
-	}
-	/**
-	 * Gets the capacity.
-	 * 
-	 * @return int
-	 */
-	public int getOrder() {
-		return ciOrder;
-	}
+    /**
+     * Gets the attributeId.
+     *
+     * @return String
+     */
+    public String getAttributeId() {
+        return csAttributeId;
+    }
 
-	/**
-	 * Sets the Attributes.
-	 * 
-	 * @param attributes
-	 *            List<Attribute>
-	 */
-	public void setAttributes(List<Attribute> attributes) {
-		caAttributes = attributes;
-	}
+    /**
+     * Sets the Attribute Id.
+     *
+     * @param attributeId String
+     */
+    public void setAttributeId(String attributeId) {
+        csAttributeId = attributeId;
+    }
 
-	/**
-	 * Sets the Order.
-	 * 
-	 * @param order
-	 *            int
-	 */
-	public void setOrder(int order) {
-		ciOrder = order;
-	}
+    /**
+     * Get the list of attributes.
+     *
+     * @return List&gt;Attribute&lt;
+     */
+    public List<Attribute> getAttributes() {
+        return caAttributes;
+    }
 
-	/**
-	 * Sets the Attribute Id.
-	 * 
-	 * @param attributeId
-	 *            String
-	 */
-	public void setAttributeId(String attributeId) {
-		csAttributeId = attributeId;
-	}
+    /**
+     * Sets the Attributes.
+     *
+     * @param attributes List&gt;Attribute&lt;
+     */
+    public void setAttributes(List<Attribute> attributes) {
+        caAttributes = attributes;
+    }
 
-	/**
-	 * Sets the Descr.
-	 * 
-	 * @param descr
-	 *            String
-	 */
-	public void setDescr(String descr) {
-		csDescr = descr;
-	}
+    /**
+     * Gets the descr.
+     *
+     * @return String
+     */
+    public String getDescr() {
+        return csDescr;
+    }
 
-	/**
-	 * Sets the Last Modified.
-	 * 
-	 * @param lastModified
-	 *            String
-	 */
-	public void setLastModified(String lastModified) {
-		csLastModified = lastModified;
-	}
+    /**
+     * Sets the Descr.
+     *
+     * @param descr String
+     */
+    public void setDescr(String descr) {
+        csDescr = descr;
+    }
 
-	/**
-	 * Sets the Name.
-	 * 
-	 * @param name
-	 *            String
-	 */
-	public void setName(String name) {
-		csName = name;
-	}
+    /**
+     * Gets the lastModified.
+     *
+     * @return String
+     */
+    public String getLastModified() {
+        return csLastModified;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString()
- {
-		String lsAttrs = "";
+    /**
+     * Sets the Last Modified.
+     *
+     * @param lastModified String
+     */
+    public void setLastModified(String lastModified) {
+        csLastModified = lastModified;
+    }
 
-		for (int i = 0; caAttributes != null && i < caAttributes.size(); i++) {
-			lsAttrs += " " + caAttributes.get(i).toString();
-		}
-		StringBuilder builder = new StringBuilder();
-		builder.append("ROOM [attributeid=");
-		builder.append(csAttributeId);
-		builder.append(", descr=");
-		builder.append(csDescr);
-		builder.append(", lastmodified=");
-		builder.append(csLastModified);
-		builder.append(", name=");
-		builder.append(csName);
-		builder.append(lsAttrs.equals("") ? "" : "," + lsAttrs);
-		builder.append("]");
-		return builder.toString();
-	}
+    /**
+     * Gets the name.
+     *
+     * @return String
+     */
+    public String getName() {
+        return csName;
+    }
+
+    /**
+     * Sets the Name.
+     *
+     * @param name String
+     */
+    public void setName(String name) {
+        csName = name;
+    }
+
+    /**
+     * Gets the capacity.
+     *
+     * @return int
+     */
+    public int getOrder() {
+        return ciOrder;
+    }
+
+    /**
+     * Sets the Order.
+     *
+     * @param order int
+     */
+    public void setOrder(int order) {
+        ciOrder = order;
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        String lsAttrs = "";
+
+        for (int i = 0; caAttributes != null && i < caAttributes.size(); i++) {
+            lsAttrs += " " + caAttributes.get(i).toString();
+        }
+        StringBuilder builder = new StringBuilder();
+        builder.append("ROOM [attributeid=");
+        builder.append(csAttributeId);
+        builder.append(", descr=");
+        builder.append(csDescr);
+        builder.append(", lastmodified=");
+        builder.append(csLastModified);
+        builder.append(", name=");
+        builder.append(csName);
+        builder.append(lsAttrs.equals("") ? "" : "," + lsAttrs);
+        builder.append("]");
+        return builder.toString();
+    }
 }

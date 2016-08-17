@@ -1,8 +1,8 @@
 package com.alliancetech.rest.data;
 
-import java.util.ArrayList;
-
 import com.google.gson.annotations.SerializedName;
+
+import java.util.ArrayList;
 
 /*
  * RegistrantList.java
@@ -18,99 +18,90 @@ import com.google.gson.annotations.SerializedName;
 
 /**
  * Contains a list of registrants. This can be serialized to JSON
- * 
- * @version Ver 1.0 Aug 23, 2010
+ *
  * @author Chris Speir<br>
- * Creation Date: Aug 23, 2010 5:23:17 PM
+ *         Creation Date: Aug 23, 2010 5:23:17 PM
+ * @version Ver 1.0 Aug 23, 2010
  */
-public class RegistrantList
-{
-	@SerializedName("attrName")
-	private ArrayList<String> attrName = new ArrayList<String>();
-	@SerializedName("lastModified")
-	private String lastModified;
-	@SerializedName("registrantList")
-	private ArrayList<Registrant> registrantList = new ArrayList<Registrant>();
-	@SerializedName("rfidPrinter")
-	private String rfidPrinter;
+public class RegistrantList {
+    @SerializedName("attrName")
+    private ArrayList<String> attrName = new ArrayList<String>();
+    @SerializedName("lastModified")
+    private String lastModified;
+    @SerializedName("registrantList")
+    private ArrayList<Registrant> registrantList = new ArrayList<Registrant>();
+    @SerializedName("rfidPrinter")
+    private String rfidPrinter;
 
-	/**
-	 * Gets the attrName.
-	 * 
-	 * @return ArrayList<String>
-	 */
-	public ArrayList<String> getAttrName()
-	{
-		return attrName;
-	}
+    /**
+     * Gets the attrName.
+     *
+     * @return ArrayList&gt;String&lt;
+     */
+    public ArrayList<String> getAttrName() {
+        return attrName;
+    }
 
-	/**
-	 * Get the last modified timestamp
-	 * 
-	 * @return String
-	 */
-	public String getLastModified()
-	{
-		return lastModified;
-	}
+    /**
+     * Sets the attrName.
+     *
+     * @param attrName ArrayList&gt;String&lt;
+     */
+    public void setAttrName(ArrayList<String> attrName) {
+        this.attrName = attrName;
+    }
 
-	/**
-	 * Gets the caRegistrantList.
-	 * 
-	 * @return ArrayList
-	 */
-	public ArrayList<Registrant> getRegistrantList()
-	{
-		return registrantList;
-	}
+    /**
+     * Get the last modified timestamp
+     *
+     * @return String
+     */
+    public String getLastModified() {
+        return lastModified;
+    }
 
-	/**
-	 * Gets the rfidPrinter.
-	 * 
-	 * @return String
-	 */
-	public String getRfidPrinter()
-	{
-		return rfidPrinter;
-	}
+    /**
+     * Set the last modified timestamp.
+     *
+     * @param asLastModified String
+     */
+    public void setLastModified(String asLastModified) {
+        lastModified = asLastModified;
+    }
 
-	/**
-	 * Sets the attrName.
-	 * 
-	 * @param attrName ArrayList<String>
-	 */
-	public void setAttrName(ArrayList<String> attrName)
-	{
-		this.attrName = attrName;
-	}
+    /**
+     * Gets the caRegistrantList.
+     *
+     * @return ArrayList&gt;Registrant&lt;
+     */
+    public ArrayList<Registrant> getRegistrantList() {
+        return registrantList;
+    }
 
-	/**
-	 * Set the last modified timestamp.
-	 * 
-	 * @param asLastModified String
-	 */
-	public void setLastModified(String asLastModified)
-	{
-		lastModified = asLastModified;
-	}
+    /**
+     * Sets the caRegistrantList.
+     *
+     * @param caRegistrantList ArrayList
+     */
+    public void setRegistrantList(ArrayList<Registrant> caRegistrantList) {
+        this.registrantList = caRegistrantList;
+    }
 
-	/**
-	 * Sets the caRegistrantList.
-	 * 
-	 * @param caRegistrantList ArrayList
-	 */
-	public void setRegistrantList(ArrayList<Registrant> caRegistrantList)
-	{
-		this.registrantList = caRegistrantList;
-	}
+    /**
+     * Gets the rfidPrinter.
+     *
+     * @return String
+     */
+    public String getRfidPrinter() {
+        return rfidPrinter;
+    }
 
-	/**
-	 * Sets the rfidPrinter.
-	 * 
-	 * @param rfidPrinter String
-	 */
-	public void setRfidPrinter(String rfidPrinter)
-	{
-		this.rfidPrinter = rfidPrinter;
-	}
+    /**
+     * Sets the rfidPrinter.
+     *
+     * @param rfidPrinter String
+     */
+    public void setRfidPrinter(String rfidPrinter) {
+        this.rfidPrinter = rfidPrinter;
+    }
 }

@@ -1,8 +1,8 @@
 package com.alliancetech.rest.data;
 
-import java.util.ArrayList;
-
 import com.google.gson.annotations.SerializedName;
+
+import java.util.ArrayList;
 
 /*
  * AttendanceResponseList.java
@@ -18,55 +18,50 @@ import com.google.gson.annotations.SerializedName;
 
 /**
  * AttendanceResponseList Class Description.
- * 
- * @version Ver # Jul 24, 2014
+ *
  * @author Gaspar <br>
- * Creation Date: Jul 24, 2014 4:25:02 PM
+ *         Creation Date: Jul 24, 2014 4:25:02 PM
+ * @version Ver # Jul 24, 2014
  */
-public class AttendanceResponseList
-{
-	@SerializedName("lastModified")
-	private String lastModified;
-	@SerializedName("attendance")
-	private ArrayList<AttendanceResponse> attendanceResponseList = new ArrayList<AttendanceResponse>();
+public class AttendanceResponseList {
+    @SerializedName("lastModified")
+    private String lastModified;
+    @SerializedName("attendance")
+    private ArrayList<AttendanceResponse> attendanceResponseList = new ArrayList<AttendanceResponse>();
 
-	/**
+    /**
      * Gets the AttendanceResponse List.
-     * 
+     *
      * @return ArrayList
      */
-	public ArrayList<AttendanceResponse> getAttendanceResponseList()
-	{
-		return attendanceResponseList;
-	}
+    public ArrayList<AttendanceResponse> getAttendanceResponseList() {
+        return attendanceResponseList;
+    }
 
-	/**
-	 * Gets the lastModified.
-	 * 
-	 * @return String
-	 */
-	public String getLastModified()
-	{
-		return lastModified;
-	}
-
-	/**
+    /**
      * Sets the AttendanceResponseList.
-     * 
-     * @param attendanceResponseList ArrayList
+     *
+     * @param caAttendanceResponseList ArrayList
      */
-	public void setAttendanceResponseList(ArrayList<AttendanceResponse> caAttendanceResponseList)
-	{
-		attendanceResponseList = caAttendanceResponseList;
-	}
+    public void setAttendanceResponseList(ArrayList<AttendanceResponse> caAttendanceResponseList) {
+        attendanceResponseList = caAttendanceResponseList;
+    }
 
-	/**
-	 * Sets the lastModified.
-	 * 
-	 * @param lastModified String
-	 */
-	public void setLastModified(String lastModified)
-	{
-		this.lastModified = lastModified;
-	}
+    /**
+     * Gets the lastModified.
+     *
+     * @return String
+     */
+    public String getLastModified() {
+        return lastModified;
+    }
+
+    /**
+     * Sets the lastModified.
+     *
+     * @param lastModified String
+     */
+    public void setLastModified(String lastModified) {
+        this.lastModified = lastModified;
+    }
 }

@@ -3,57 +3,56 @@ package com.alliancetech.rest.data;
 import com.google.gson.annotations.SerializedName;
 
 public class AssociationResponse {
-	@SerializedName("epc")
-	private String epc;
-	
-	@SerializedName("index")
-	private String index;
-	
-	@SerializedName("num")
-	private String registrantNum;
-	
-	@SerializedName("status")
-	private String status;
-	
-	public String getEpc() {
-		return epc;
-	}
+    @SerializedName("epc")
+    private String epc;
 
-	public void setEpc(String epc) {
-		this.epc = epc;
-	}
+    @SerializedName("index")
+    private String index;
 
-	public String getIndex() {
-		return index;
-	}
+    @SerializedName("num")
+    private String registrantNum;
 
-	public void setIndex(String index) {
-		this.index = index;
-	}
+    @SerializedName("status")
+    private String status;
 
-	public String getRegistrantNum() {
-		return registrantNum;
-	}
+    public String getEpc() {
+        return epc;
+    }
 
-	public void setRegistrantNum(String registrantNum) {
-		this.registrantNum = registrantNum;
-	}
+    public void setEpc(String epc) {
+        this.epc = epc;
+    }
 
-	public String getStatus() {
-		return status;
-	}
+    public String getIndex() {
+        return index;
+    }
 
-	public void setStatus(String status) {
-		this.status = status;
-	}
-	
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString()
-	{
-		return "AssociationResponse [index=" + index + ", num=" + registrantNum
-				+ ", epc=" + epc + ", status=" + status + "]";
-	}
+    public void setIndex(String index) {
+        this.index = index;
+    }
+
+    public String getRegistrantNum() {
+        return registrantNum;
+    }
+
+    public void setRegistrantNum(String registrantNum) {
+        this.registrantNum = registrantNum;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "AssociationResponse [index=" + index + ", num=" + registrantNum
+                + ", epc=" + epc + ", status=" + status + "]";
+    }
 }

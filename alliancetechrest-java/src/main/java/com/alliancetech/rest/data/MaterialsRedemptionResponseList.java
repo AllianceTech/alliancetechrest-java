@@ -12,93 +12,85 @@ package com.alliancetech.rest.data;
  * ---------------------------------------------------------------------
  */
 
-import java.util.ArrayList;
-
 import com.google.gson.annotations.SerializedName;
+
+import java.util.ArrayList;
 
 /**
  * Response to a post of an array of data.
- * 
- * @version Ver 1.0 Mar 17, 2010
+ *
  * @author Chris Speir<br>
- * Creation Date: Mar 17, 2010 5:11:24 PM
+ *         Creation Date: Mar 17, 2010 5:11:24 PM
+ * @version Ver 1.0 Mar 17, 2010
  */
-public class MaterialsRedemptionResponseList
-{
-	@SerializedName("redemptionErrorList")
-	private ArrayList<PostError> caPostErrorList = new ArrayList<PostError>();
-	@SerializedName("errorCode")
-	private String csErrorCode;
-	@SerializedName("status")
-	private String csStatus;
+public class MaterialsRedemptionResponseList {
+    @SerializedName("redemptionErrorList")
+    private ArrayList<PostError> caPostErrorList = new ArrayList<PostError>();
+    @SerializedName("errorCode")
+    private String csErrorCode;
+    @SerializedName("status")
+    private String csStatus;
 
-	/**
-	 * Add an My Agenda error to the list.
-	 * 
-	 * @param aaPostError PostError
-	 */
-	public void add(PostError aaPostError)
-	{
-		caPostErrorList.add(aaPostError);
-	}
+    /**
+     * Add an My Agenda error to the list.
+     *
+     * @param aaPostError PostError
+     */
+    public void add(PostError aaPostError) {
+        caPostErrorList.add(aaPostError);
+    }
 
-	/**
-	 * Get error code.
-	 * 
-	 * @return String
-	 */
-	public String getErrorCode()
-	{
-		return csErrorCode;
-	}
+    /**
+     * Get error code.
+     *
+     * @return String
+     */
+    public String getErrorCode() {
+        return csErrorCode;
+    }
 
-	/**
-	 * Gets the caPostErrorList.
-	 * 
-	 * @return ArrayList<PostError>
-	 */
-	public ArrayList<PostError> getPostErrorList()
-	{
-		return caPostErrorList;
-	}
+    /**
+     * Set error code.
+     *
+     * @param asErrorCode String
+     */
+    public void setErrorCode(String asErrorCode) {
+        csErrorCode = asErrorCode;
+    }
 
-	/**
-	 * Get status.
-	 * 
-	 * @return String
-	 */
-	public String getStatus()
-	{
-		return csStatus;
-	}
+    /**
+     * Gets the caPostErrorList.
+     *
+     * @return ArrayList&gt;PostError&lt;
+     */
+    public ArrayList<PostError> getPostErrorList() {
+        return caPostErrorList;
+    }
 
-	/**
-	 * Set error code.
-	 * 
-	 * @param asErrorCode String
-	 */
-	public void setErrorCode(String asErrorCode)
-	{
-		csErrorCode = asErrorCode;
-	}
+    /**
+     * Sets the caPostErrorList.
+     *
+     * @param caPostErrorList ArrayList&gt;PostError&lt;
+     */
+    public void setPostErrorList(ArrayList<PostError> caPostErrorList) {
+        this.caPostErrorList = caPostErrorList;
+    }
 
-	/**
-	 * Sets the caPostErrorList.
-	 * 
-	 * @param caPostErrorList ArrayList<PostError>
-	 */
-	public void setPostErrorList(ArrayList<PostError> caPostErrorList)
-	{
-		this.caPostErrorList = caPostErrorList;
-	}
+    /**
+     * Get status.
+     *
+     * @return String
+     */
+    public String getStatus() {
+        return csStatus;
+    }
 
-	/**
-	 * Set status.
-	 * 
-	 * @param asStatus String
-	 */
-	public void setStatus(String asStatus)
-	{
-		csStatus = asStatus;
-	}
+    /**
+     * Set status.
+     *
+     * @param asStatus String
+     */
+    public void setStatus(String asStatus) {
+        csStatus = asStatus;
+    }
 }

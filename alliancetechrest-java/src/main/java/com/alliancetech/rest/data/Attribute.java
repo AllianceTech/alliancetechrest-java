@@ -16,107 +16,98 @@ import com.google.gson.annotations.SerializedName;
 
 /**
  * Represents an attribute which consists of a name and a value.
- * 
- * @version Ver 1.0 Feb 14, 2010
+ *
  * @author Chris Speir<br>
- * Creation Date: Feb 14, 2010 8:04:17 PM
+ *         Creation Date: Feb 14, 2010 8:04:17 PM
+ * @version Ver 1.0 Feb 14, 2010
  */
-public class Attribute
-{
-	@SerializedName("id")
-	private String id;
-	@SerializedName("name")
-	private String name;
-	@SerializedName("val")
-	private String val;
+public class Attribute {
+    @SerializedName("id")
+    private String id;
+    @SerializedName("name")
+    private String name;
+    @SerializedName("val")
+    private String val;
 
-	/**
-     * @param name
-     * @param val
+    /**
+     * @param name Name
+     * @param val  Value
      */
-	public Attribute(String name, String val)
-	{
-		super();
-		this.name = name;
-		this.val = val;
-	}
+    public Attribute(String name, String val) {
+        super();
+        this.name = name;
+        this.val = val;
+    }
 
-	/**
-	 * default constructor in order to serialize with jackson-json
-	 * see http://stackoverflow.com/questions/7625783/jsonmappingexception-no-suitable-constructor-found-for-type-simple-type-class
-	 */
-	public Attribute() {
+    /**
+     * default constructor in order to serialize with jackson-json
+     * see http://stackoverflow.com/questions/7625783/jsonmappingexception-no-suitable-constructor-found-for-type-simple-type-class
+     */
+    public Attribute() {
 
-	}
+    }
 
-	/**
+    /**
      * Gets the id.
-     * 
+     *
      * @return String
      */
-	public String getId()
-	{
-		return id;
-	}
+    public String getId() {
+        return id;
+    }
 
-	/**
-     * Gets the name.
-     * 
-     * @return String
-     */
-	public String getName()
-	{
-		return name;
-	}
-
-	/**
-     * Gets the val.
-     * 
-     * @return String
-     */
-	public String getVal()
-	{
-		return val;
-	}
-
-	/**
+    /**
      * Sets the id.
-     * 
+     *
      * @param id String
      */
-	public void setId(String id)
-	{
-		this.id = id;
-	}
+    public void setId(String id) {
+        this.id = id;
+    }
 
-	/**
+    /**
+     * Gets the name.
+     *
+     * @return String
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
      * Sets the name.
-     * 
+     *
      * @param name String
      */
-	public void setName(String name)
-	{
-		this.name = name;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	/**
+    /**
+     * Gets the val.
+     *
+     * @return String
+     */
+    public String getVal() {
+        return val;
+    }
+
+    /**
      * Sets the val.
-     * 
+     *
      * @param val String
      */
-	public void setVal(String val)
-	{
-		this.val = val;
-	}
+    public void setVal(String val) {
+        this.val = val;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString()
-	{
-		return "Attribute [id=" + id + ", name=" + name
-				+ ", val=" + val + "]";
-	}
+    /*
+     * (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "Attribute [id=" + id + ", name=" + name
+                + ", val=" + val + "]";
+    }
 }

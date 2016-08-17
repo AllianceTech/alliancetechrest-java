@@ -1,8 +1,8 @@
 package com.alliancetech.rest.data;
 
-import java.util.ArrayList;
-
 import com.google.gson.annotations.SerializedName;
+
+import java.util.ArrayList;
 
 /*
  * AssociationList.java
@@ -18,55 +18,50 @@ import com.google.gson.annotations.SerializedName;
 
 /**
  * Contains a list of registrants. This can be serialized to JSON
- * 
- * @version Ver 1.0 Aug 23, 2010
+ *
  * @author Chris Speir<br>
- * Creation Date: Aug 23, 2010 5:23:17 PM
+ *         Creation Date: Aug 23, 2010 5:23:17 PM
+ * @version Ver 1.0 Aug 23, 2010
  */
-public class AssociationList
-{
-	@SerializedName("associationList")
-	private ArrayList<Association> associationList = new ArrayList<Association>();
-	@SerializedName("lastModified")
-	private String lastModified;
+public class AssociationList {
+    @SerializedName("associationList")
+    private ArrayList<Association> associationList = new ArrayList<Association>();
+    @SerializedName("lastModified")
+    private String lastModified;
 
-	/**
+    /**
      * Get the last modified timestamp
-     * 
+     *
      * @return String
      */
-	public String getLastModified()
-	{
-		return lastModified;
-	}
+    public String getLastModified() {
+        return lastModified;
+    }
 
-	/**
-     * Gets the caRegistrantList.
-     * 
-     * @return ArrayList
-     */
-	public ArrayList<Association> getAssociationList()
-	{
-		return associationList;
-	}
-
-	/**
+    /**
      * Set the last modified timestamp.
-     * 
+     *
      * @param asLastModified String
      */
-	public void setLastModified(String asLastModified)
-	{
-		lastModified = asLastModified;
-	}
+    public void setLastModified(String asLastModified) {
+        lastModified = asLastModified;
+    }
 
-	/**
+    /**
+     * Gets the caRegistrantList.
+     *
+     * @return ArrayList
+     */
+    public ArrayList<Association> getAssociationList() {
+        return associationList;
+    }
+
+    /**
      * Sets the caAssociationList.
-     * 
+     *
      * @param caAssociationList ArrayList
      */
-	public void setAssociationList(ArrayList<Association> caAssociationList)
-	{
-		this.associationList = caAssociationList;
-	}
+    public void setAssociationList(ArrayList<Association> caAssociationList) {
+        this.associationList = caAssociationList;
+    }
 }

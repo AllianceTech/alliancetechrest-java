@@ -1,8 +1,8 @@
 package com.alliancetech.rest.data;
 
-import java.util.ArrayList;
-
 import com.google.gson.annotations.SerializedName;
+
+import java.util.ArrayList;
 
 /*
  * ImageList.java
@@ -18,75 +18,68 @@ import com.google.gson.annotations.SerializedName;
 
 /**
  * The RESTAPI object for image list data.
- * 
- * @version Ver 4.0
+ *
  * @author Jeff Seifert<br>
- * Creation Date: 04/27/2015 14:50
+ *         Creation Date: 04/27/2015 14:50
+ * @version Ver 4.0
  */
-public class ImageList
-{
-	@SerializedName("imageList")
-	private ArrayList<Image> imageList = new ArrayList<Image>();
-	@SerializedName("lastModified")
-	private String lastModified;
+public class ImageList {
+    @SerializedName("imageList")
+    private ArrayList<Image> imageList = new ArrayList<Image>();
+    @SerializedName("lastModified")
+    private String lastModified;
 
-	/**
-	 * Add an RegistrantCheckin to the list
-	 * 
-	 * @param aaRegistrantCheckin RegistrantCheckin
-	 */
-	public void add(Image aaImage)
-	{
-		imageList.add(aaImage);
-	}
+    /**
+     * Add an RegistrantCheckin to the list
+     *
+     * @param aaImage Image
+     */
+    public void add(Image aaImage) {
+        imageList.add(aaImage);
+    }
 
-	/**
-	 * Gets the Image List.
-	 * 
-	 * @return ArrayList<Image>
-	 */
-	public ArrayList<Image> getImageList()
-	{
-		return imageList;
-	}
+    /**
+     * Gets the Image List.
+     *
+     * @return ArrayList&gt;Image&lt;
+     */
+    public ArrayList<Image> getImageList() {
+        return imageList;
+    }
 
-	/**
-	 * Get the last modified timestamp
-	 * 
-	 * @return String
-	 */
-	public String getLastModified()
-	{
-		return lastModified;
-	}
+    /**
+     * Sets the Image list.
+     *
+     * @param aaImageList ArrayList&gt;Image&lt;
+     */
+    public void setImageList(ArrayList<Image> aaImageList) {
+        this.imageList = aaImageList;
+    }
 
-	/**
-	 * Sets the Image list.
-	 * 
-	 * @param aaImageList ArrayList<Image>
-	 */
-	public void setImageList(ArrayList<Image> aaImageList)
-	{
-		this.imageList = aaImageList;
-	}
+    /**
+     * Get the last modified timestamp
+     *
+     * @return String
+     */
+    public String getLastModified() {
+        return lastModified;
+    }
 
-	/**
-	 * Set the last modified timestamp.
-	 * 
-	 * @param asLastModified String
-	 */
-	public void setLastModified(String asLastModified)
-	{
-		this.lastModified = asLastModified;
-	}
+    /**
+     * Set the last modified timestamp.
+     *
+     * @param asLastModified String
+     */
+    public void setLastModified(String asLastModified) {
+        this.lastModified = asLastModified;
+    }
 
-	/**
-	 * Get ImageList size.
-	 * 
-	 * @return int
-	 */
-	public int size()
-	{
-		return imageList.size();
-	}
+    /**
+     * Get ImageList size.
+     *
+     * @return int
+     */
+    public int size() {
+        return imageList.size();
+    }
 }

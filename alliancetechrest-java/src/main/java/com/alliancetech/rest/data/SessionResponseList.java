@@ -12,40 +12,37 @@ package com.alliancetech.rest.data;
  * ---------------------------------------------------------------------
  */
 
-import java.util.ArrayList;
-
 import com.google.gson.annotations.SerializedName;
+
+import java.util.ArrayList;
 
 /**
  * Response to a my agenda POST.
- * 
- * @version Ver 1.0 Mar 17, 2010
+ *
  * @author Chris Speir<br>
- * Creation Date: Mar 17, 2010 5:11:24 PM
+ *         Creation Date: Mar 17, 2010 5:11:24 PM
+ * @version Ver 1.0 Mar 17, 2010
  */
-public class SessionResponseList
-{
-	@SerializedName("sessionResponseList")
-	private ArrayList<SessionResponse> ResponseList = new ArrayList<SessionResponse>();
+public class SessionResponseList {
+    @SerializedName("sessionResponseList")
+    private ArrayList<SessionResponse> ResponseList = new ArrayList<SessionResponse>();
 
-	/**
+    /**
      * Gets the ResponseList.
-     * 
+     *
      * @return ArrayList
      */
-	public ArrayList<SessionResponse> getResponseList()
-	{
-		return ResponseList;
-	}
+    public ArrayList<SessionResponse> getResponseList() {
+        return ResponseList;
+    }
 
-	/**
+    /**
      * Sets the ResponseList.
-     * 
+     *
      * @param responseList ArrayList
      */
-	public void setResponseList(ArrayList<SessionResponse> responseList)
-	{
-		ResponseList = responseList;
-	}
+    public void setResponseList(ArrayList<SessionResponse> responseList) {
+        ResponseList = responseList;
+    }
 
 }

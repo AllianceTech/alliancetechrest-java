@@ -16,71 +16,65 @@ import com.google.gson.annotations.SerializedName;
 
 /**
  * Default JSON rest api response
- * 
- * @version Ver 1.0 Jun 15, 2010
+ *
  * @author Chris Speir<br>
- * Creation Date: Jun 15, 2010 8:27:15 PM
+ *         Creation Date: Jun 15, 2010 8:27:15 PM
+ * @version Ver 1.0 Jun 15, 2010
  */
-public class DefaultResponse
-{
-	@SerializedName("errorCode")
-	private String errorCode;
-	@SerializedName("status")
-	private String status;
+public class DefaultResponse {
+    @SerializedName("errorCode")
+    private String errorCode;
+    @SerializedName("status")
+    private String status;
 
-	/**
+    /**
      * Gets the errorCode.
-     * 
+     *
      * @return String
      */
-	public String getErrorCode()
-	{
-		return errorCode;
-	}
+    public String getErrorCode() {
+        return errorCode;
+    }
 
-	/**
-     * Gets the status.
-     * 
-     * @return String
-     */
-	public String getStatus()
-	{
-		return status;
-	}
-
-	/**
+    /**
      * Sets the errorCode.
-     * 
+     *
      * @param errorCode String
      */
-	public void setErrorCode(String errorCode)
-	{
-		this.errorCode = errorCode;
-	}
+    public void setErrorCode(String errorCode) {
+        this.errorCode = errorCode;
+    }
 
-	/**
+    /**
+     * Gets the status.
+     *
+     * @return String
+     */
+    public String getStatus() {
+        return status;
+    }
+
+    /**
      * Sets the status.
-     * 
+     *
      * @param status String
      */
-	public void setStatus(String status)
-	{
-		this.status = status;
-	}
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString()
-	{
-		StringBuilder builder = new StringBuilder();
-		builder.append("DefaultResponse [status=");
-		builder.append(status);
-		builder.append(", errorCode=");
-		builder.append(errorCode);
-		builder.append("]");
-		return builder.toString();
-	}
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("DefaultResponse [status=");
+        builder.append(status);
+        builder.append(", errorCode=");
+        builder.append(errorCode);
+        builder.append("]");
+        return builder.toString();
+    }
 
 }
