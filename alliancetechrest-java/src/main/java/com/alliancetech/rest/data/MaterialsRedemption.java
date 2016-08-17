@@ -153,7 +153,7 @@ public class MaterialsRedemption {
     /**
      * Gets the chtMaterials.
      *
-     * @return Vector<MaterialAttr>
+     * @return Vector&gt;MaterialAttr&lt;
      */
     public Vector<MaterialAttr> getMaterials() {
         return materials;
@@ -162,7 +162,7 @@ public class MaterialsRedemption {
     /**
      * Sets the chtMaterials.
      *
-     * @param avMaterials Vector<MaterialAttr>
+     * @param avMaterials Vector&gt;MaterialAttr&lt;
      */
     public void setMaterials(Vector<MaterialAttr> avMaterials) {
         this.materials = avMaterials;
@@ -234,7 +234,7 @@ public class MaterialsRedemption {
     /**
      * Sets the Survey Id
      *
-     * @param asSurveyId
+     * @param asSurveyId Survey ID
      */
     public void setSurveyId(String asSurveyId) {
         this.surveyId = asSurveyId;

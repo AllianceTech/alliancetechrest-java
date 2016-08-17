@@ -317,7 +317,7 @@ public class Registrant {
     /**
      * Sets the attrList.
      *
-     * @param attrList ArrayList<Attribute>
+     * @param attrList ArrayList&gt;Attribute&lt;
      */
     public void setAttrList(ArrayList<Attribute> attrList) {
         this.attrList = attrList;
@@ -1022,7 +1022,6 @@ public class Registrant {
      * @param asName      String
      * @param asVal       String
      * @param abMultiAttr boolean
-     * @return boolean
      */
     public void setAttribute(String asName, String asVal, boolean abMultiAttr) {
         if (UtilityMethods.isValidString(asName) && UtilityMethods.isValidString(asName)) {
