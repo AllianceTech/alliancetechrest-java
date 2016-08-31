@@ -1,5 +1,5 @@
-alliancetechrest-java/cfg/creds.properties
-alliancetechrest-java/.idea/**
-alliancetechrest-java/.idea/
-alliancetechrest-java/alliancetechrest-java.iml
-alliancetechrest-java/target/
+cfg/creds.properties
+.idea/**
+.idea/
+alliancetechrest-java.iml
+target/
