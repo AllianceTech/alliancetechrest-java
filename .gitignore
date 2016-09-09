@@ -3,3 +3,4 @@ cfg/creds.properties
 .idea/
 alliancetechrest-java.iml
 target/
+creds.properties
