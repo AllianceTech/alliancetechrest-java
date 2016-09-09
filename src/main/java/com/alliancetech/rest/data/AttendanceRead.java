@@ -23,6 +23,8 @@ public class AttendanceRead {
     private String ipAddress;
     @SerializedName("readTimestamp")
     private String readTimestamp;
+    @SerializedName("readTimestampUTC")
+    private String readTimestampUTC;
     @SerializedName("registrantId")
     private String registrantId;
     @SerializedName("registrantNum")
@@ -94,6 +96,14 @@ public class AttendanceRead {
         this.readTimestamp = readTimestamp;
     }
 
+    public String getReadTimestampUTC() {
+        return readTimestampUTC;
+    }
+
+    public void setReadTimestampUTC(String readTimestampUTC) {
+        this.readTimestampUTC = readTimestampUTC;
+    }
+
     public String getRegistrantId() {
         return registrantId;
     }
@@ -160,6 +170,7 @@ public class AttendanceRead {
         sb.append(", id='").append(id).append('\'');
         sb.append(", ipAddress='").append(ipAddress).append('\'');
         sb.append(", readTimestamp='").append(readTimestamp).append('\'');
+        sb.append(", readTimestampUTC='").append(readTimestampUTC).append('\'');
         sb.append(", registrantId='").append(registrantId).append('\'');
         sb.append(", registrantNum='").append(registrantNum).append('\'');
         sb.append(", sessionId='").append(sessionId).append('\'');
