@@ -49,6 +49,8 @@ public class Session {
     private String description;
     @SerializedName("end")
     private String endTime;
+    @SerializedName("endTimestampUTC")
+    private String endTimeUTC;
     @SerializedName("enrollable")
     private boolean enrollable;
     @SerializedName("keywords")
@@ -71,6 +73,8 @@ public class Session {
     private String shortTitle;
     @SerializedName("start")
     private String startTime;
+    @SerializedName("startTimestampUTC")
+    private String startTimeUTC;
     @SerializedName("status")
     private String simStatus;
     @SerializedName("submissionNum")
@@ -566,6 +570,38 @@ public class Session {
         this.enrollable = enrollable;
     }
 
+    /**
+     * Retrieves the ISO8601 String representation of the End Time of the session
+     * @return String
+     */
+    public String getEndTimeUTC() {
+        return endTimeUTC;
+    }
+
+    /**
+     * Sets the End Time in UTC
+     * @param endTimeUTC String
+     */
+    public void setEndTimeUTC(String endTimeUTC) {
+        this.endTimeUTC = endTimeUTC;
+    }
+
+    /**
+     * Retrieves the ISO8601 String representation of the Start Time of the session
+     * @return String
+     */
+    public String getStartTimeUTC() {
+        return startTimeUTC;
+    }
+
+    /**
+     * Sets the End Time in UTC
+     * @param startTimeUTC String
+     */
+    public void setStartTimeUTC(String startTimeUTC) {
+        this.startTimeUTC = startTimeUTC;
+    }
+
     /*
      * (non-Javadoc)
      * @see java.lang.Object#toString()
@@ -577,6 +613,7 @@ public class Session {
                 + shortTitle + ", desc=" + description + ", active=" + active + ", date="
                 + date + ", start=" + startTime + ", end=" + endTime + ", scanStart="
                 + scanStartTime + ", scanEnd=" + scanEndTime + ", room=" + room
+                + ", startUTC=" + startTimeUTC + ", endUTC=" + endTimeUTC
                 + ", capacity=" + capacity + ", location=" + location + ", status="
                 + simStatus + ", survey=" + survey + ", enrollable=" + enrollable
                 + ", keywords=" + keywords + ", sessionRole=" + sessionRole
