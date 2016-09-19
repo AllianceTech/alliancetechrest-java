@@ -4,6 +4,7 @@ import com.alliancetech.rest.data.*;
 
 import java.util.HashMap;
 import java.util.Map;
+import org.apache.http.client.HttpClient;
 
 /**
  * Alliance Tech REST API client
@@ -56,6 +57,19 @@ public class AllianceTechRestClient extends RestUtility {
      */
     public AllianceTechRestClient(String asUsername, String asPassword, String asHostname) {
         super(asUsername, asPassword, asHostname);
+    }
+
+    /**
+     * Constructor.
+     *
+     * @param asUsername String
+     * @param asPassword String
+     * @param asHostname String
+     * @param aaHTTPClient HttpClient
+     */
+    public AllianceTechRestClient(String asUsername, String asPassword, String asHostname,
+            HttpClient aaHTTPClient) {
+        super(asUsername, asPassword, asHostname, aaHTTPClient);
     }
 
     /**
