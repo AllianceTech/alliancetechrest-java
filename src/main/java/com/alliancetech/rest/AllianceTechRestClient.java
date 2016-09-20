@@ -86,7 +86,7 @@ public class AllianceTechRestClient extends RestUtility {
      * @param asPassword String
      * @param asHostname String
      * @param aProxyUrl The URL of the proxy you plan to use as a pass-through to the service.
-     * @throws MalformedURLException If aProxyURL cannot be interpreted as a valid URL.
+     * @throws RuntimeException If aProxyURL cannot be interpreted as a valid URL.
      */
     public AllianceTechRestClient(String asUsername, String asPassword, String asHostname, String aProxyUrl) {
         super(asUsername, asPassword, asHostname);
