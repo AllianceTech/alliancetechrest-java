@@ -1,10 +1,37 @@
 package com.alliancetech.rest;
 
-import com.alliancetech.rest.data.*;
+import com.alliancetech.rest.data.AssociationList;
+import com.alliancetech.rest.data.AssociationResponseList;
+import com.alliancetech.rest.data.AttendanceReadList;
+import com.alliancetech.rest.data.AttendanceResponseList;
+import com.alliancetech.rest.data.DefaultResponse;
+import com.alliancetech.rest.data.ImageList;
+import com.alliancetech.rest.data.MaterialsRedemptionList;
+import com.alliancetech.rest.data.MaterialsRedemptionResponseList;
+import com.alliancetech.rest.data.PersonalEventList;
+import com.alliancetech.rest.data.PersonalEventResponseList;
+import com.alliancetech.rest.data.Profile;
+import com.alliancetech.rest.data.Registrant;
+import com.alliancetech.rest.data.RegistrantList;
+import com.alliancetech.rest.data.RegistrantResponseList;
+import com.alliancetech.rest.data.RoomList;
+import com.alliancetech.rest.data.SessionList;
+import com.alliancetech.rest.data.SessionResponseList;
+import com.alliancetech.rest.data.SurveyCompletionList;
+import org.apache.http.HttpHost;
+import org.apache.http.auth.AuthScope;
+import org.apache.http.auth.UsernamePasswordCredentials;
+import org.apache.http.client.CredentialsProvider;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.params.AllClientPNames;
+import org.apache.http.conn.params.ConnRoutePNames;
+import org.apache.http.impl.client.BasicCredentialsProvider;
+import org.apache.http.impl.client.DefaultHttpClient;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
-import org.apache.http.client.HttpClient;
 
 /**
  * Alliance Tech REST API client
@@ -65,11 +92,47 @@ public class AllianceTechRestClient extends RestUtility {
      * @param asUsername String
      * @param asPassword String
      * @param asHostname String
-     * @param aaHTTPClient HttpClient
+     * @param aProxyUrl String
      */
-    public AllianceTechRestClient(String asUsername, String asPassword, String asHostname,
-            HttpClient aaHTTPClient) {
-        super(asUsername, asPassword, asHostname, aaHTTPClient);
+    public AllianceTechRestClient(String asUsername, String asPassword, String asHostname, String aProxyUrl) {
+        super(asUsername, asPassword, asHostname);
+        HttpClient theClient = this.createHttpClient(aProxyUrl);
+        super.initializeHttpClient(theClient);
+    }
+
+    /**
+     * Create an httpClient that uses a
+     * @param aProxyUrl
+     * @return
+     */
+    protected HttpClient createHttpClient(String aProxyUrl) {
+        DefaultHttpClient client = new DefaultHttpClient();
+        client.getParams().setParameter(AllClientPNames.USER_AGENT,
+                "alliancetechrest-java library");
+        if (UtilityMethods.isValidString(getUsername())
+                && UtilityMethods.isValidString(getPassword())) {
+            CredentialsProvider credProvider = new BasicCredentialsProvider();
+            credProvider.setCredentials(new AuthScope(getHost(getHostname()),
+                    AuthScope.ANY_PORT), new UsernamePasswordCredentials(getUsername(),
+                    getPassword()));
+            client.setCredentialsProvider(credProvider);
+        }
+
+        // Set up the proxy. We want to huck an exception if we're here, but don't have a proxy URL.
+        HttpHost proxyHttpHost = null;
+        if (UtilityMethods.isValidString(aProxyUrl)) {
+            URL proxyUrl;
+            try {
+                proxyUrl = new URL(aProxyUrl);
+                proxyHttpHost = new HttpHost(proxyUrl.getHost(), proxyUrl.getPort(), proxyUrl.getProtocol());
+                client.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, proxyHttpHost);
+            } catch (MalformedURLException e) {
+                throw new RuntimeException("Unable to load url correctly from the config url: " + aProxyUrl, e);
+            }
+        } else {
+            throw new RuntimeException("Invalid URL string: " + aProxyUrl);
+        }
+        return client;
     }
 
     /**
