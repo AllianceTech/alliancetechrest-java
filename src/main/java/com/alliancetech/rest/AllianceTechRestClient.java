@@ -19,14 +19,8 @@ import com.alliancetech.rest.data.SessionList;
 import com.alliancetech.rest.data.SessionResponseList;
 import com.alliancetech.rest.data.SurveyCompletionList;
 import org.apache.http.HttpHost;
-import org.apache.http.auth.AuthScope;
-import org.apache.http.auth.UsernamePasswordCredentials;
-import org.apache.http.client.CredentialsProvider;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.params.AllClientPNames;
 import org.apache.http.conn.params.ConnRoutePNames;
-import org.apache.http.impl.client.BasicCredentialsProvider;
-import org.apache.http.impl.client.DefaultHttpClient;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -87,50 +81,40 @@ public class AllianceTechRestClient extends RestUtility {
     }
 
     /**
-     * Constructor.
-     *
+     * Set up an AT rest client that uses a proxy pass-through to the AT service.
      * @param asUsername String
      * @param asPassword String
      * @param asHostname String
-     * @param aProxyUrl String
+     * @param aProxyUrl The URL of the proxy you plan to use as a pass-through to the service.
+     * @throws RuntimeException If aProxyURL cannot be interpreted as a valid URL.
      */
     public AllianceTechRestClient(String asUsername, String asPassword, String asHostname, String aProxyUrl) {
         super(asUsername, asPassword, asHostname);
-        HttpClient theClient = this.createHttpClient(aProxyUrl);
-        super.initializeHttpClient(theClient);
+        try {
+            HttpClient theClient = this.createHttpClient(aProxyUrl);
+            super.initializeHttpClient(theClient);
+        } catch (MalformedURLException e) {
+            throw new RuntimeException("Invalid URL: " + aProxyUrl, e);
+        }
     }
 
     /**
-     * Create an httpClient that uses a
-     * @param aProxyUrl
-     * @return
+     * Create an httpClient that uses a proxy pass-through to the service.
+     * @param aProxyUrl The URL of the proxy to use.
+     * @return An HttpClient configured to use the proxy.
      */
-    protected HttpClient createHttpClient(String aProxyUrl) {
-        DefaultHttpClient client = new DefaultHttpClient();
-        client.getParams().setParameter(AllClientPNames.USER_AGENT,
-                "alliancetechrest-java library");
-        if (UtilityMethods.isValidString(getUsername())
-                && UtilityMethods.isValidString(getPassword())) {
-            CredentialsProvider credProvider = new BasicCredentialsProvider();
-            credProvider.setCredentials(new AuthScope(getHost(getHostname()),
-                    AuthScope.ANY_PORT), new UsernamePasswordCredentials(getUsername(),
-                    getPassword()));
-            client.setCredentialsProvider(credProvider);
-        }
+    protected HttpClient createHttpClient(String aProxyUrl) throws MalformedURLException {
+        HttpClient client = super.createHttpClient();
 
-        // Set up the proxy. We want to huck an exception if we're here, but don't have a proxy URL.
+        // Set up the proxy. If there's anything wrong with the URL, throw the Exception.
         HttpHost proxyHttpHost = null;
         if (UtilityMethods.isValidString(aProxyUrl)) {
             URL proxyUrl;
-            try {
-                proxyUrl = new URL(aProxyUrl);
-                proxyHttpHost = new HttpHost(proxyUrl.getHost(), proxyUrl.getPort(), proxyUrl.getProtocol());
-                client.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, proxyHttpHost);
-            } catch (MalformedURLException e) {
-                throw new RuntimeException("Unable to load url correctly from the config url: " + aProxyUrl, e);
-            }
+            proxyUrl = new URL(aProxyUrl);
+            proxyHttpHost = new HttpHost(proxyUrl.getHost(), proxyUrl.getPort(), proxyUrl.getProtocol());
+            client.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, proxyHttpHost);
         } else {
-            throw new RuntimeException("Invalid URL string: " + aProxyUrl);
+            throw new MalformedURLException("Invalid URL string: " + aProxyUrl);
         }
         return client;
     }
