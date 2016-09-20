@@ -52,12 +52,22 @@ public class RestUtility {
         initializeHttpClient(aaHTTPClient);
     }
 
+    /**
+     *
+     * @param asUsername
+     * @param asPassword
+     * @param asHostname
+     */
     protected void initialize(String asUsername, String asPassword, String asHostname) {
         this.csUsername = asUsername;
         this.csPassword = asPassword;
         this.csHostname = asHostname;
     }
 
+    /**
+     * Initializes the HttpClient. If aaHTTPClient is null, this method creates one.
+     * @param aaHTTPClient An HTTPClient to use, or null if we should create one.
+     */
     protected void initializeHttpClient(HttpClient aaHTTPClient) {
         if (aaHTTPClient == null) {
             this.caHTTPClient = createHttpClient();
