@@ -29,6 +29,8 @@ public class SessionList {
     private ArrayList<String> attrName = new ArrayList<String>();
     @SerializedName("sessionList")
     private ArrayList<Session> carrSessionList = new ArrayList<Session>();
+    @SerializedName("lastModified")
+    private String lastModified;
 
     /**
      * Gets the attrName.
@@ -66,4 +68,21 @@ public class SessionList {
         carrSessionList = sessionList;
     }
 
+    /**
+     * Gets the Last Modified
+     *
+     * @return String lastModified
+     */
+    public String getLastModified() {
+        return lastModified;
+    }
+
+    /**
+     * Sets the last Modified
+     *
+     * @param lastModified String
+     */
+    public void setLastModified(String lastModified) {
+        this.lastModified = lastModified;
+    }
 }
