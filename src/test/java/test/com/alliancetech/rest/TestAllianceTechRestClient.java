@@ -7,13 +7,14 @@ import org.junit.*;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Properties;
 
 /*
  * AlliancetechTechRestClientTest.java
- * 
+ *
  * (c) Alliance Tech 2012.
  * ---------------------------------------------------------------------
  * Change History:
@@ -25,7 +26,7 @@ import java.util.Properties;
 
 /**
  * Test Class for REST Client.
- * 
+ *
  * @version Ver # Jan 18, 2012
  * @author Jeff Seifert <br>
  * Creation Date: Jan 18, 2012 12:03:10 PM
@@ -37,7 +38,7 @@ public class TestAllianceTechRestClient extends TestCase
 
 	/**
 	 * Tests the association post API.
-	 * 
+	 *
 	 * @param aiNumOfRecs int
 	 * @return AssociationList
 	 */
@@ -62,7 +63,7 @@ public class TestAllianceTechRestClient extends TestCase
 
 	/**
 	 * Generates an association list with X number of associations.
-	 * 
+	 *
 	 * @param aiNumOfRecs int
 	 * @return AssociationList
 	 */
@@ -87,7 +88,7 @@ public class TestAllianceTechRestClient extends TestCase
 
 	/**
 	 * Genrates a registration list with X number of registrants.
-	 * 
+	 *
 	 * @param aiNumOfRecs int
 	 * @return RegistrantList
 	 */
@@ -170,7 +171,7 @@ public class TestAllianceTechRestClient extends TestCase
 
 	/**
 	 * Used to get the images from the REST API.
-	 * 
+	 *
 	 * @param asImageType String
 	 * @param asLastMod String
 	 * @param aiMaxSize int
@@ -222,7 +223,7 @@ public class TestAllianceTechRestClient extends TestCase
 
 	/**
 	 * Tests the registration post API.
-	 * 
+	 *
 	 * @param aaRegList RegistrantList
 	 */
 	private RegistrantList registrantListPost(RegistrantList aaRegList)
@@ -243,8 +244,7 @@ public class TestAllianceTechRestClient extends TestCase
 	@Before
 	public void setUp() throws Exception
 	{
-		InputStream laFileServer = TestAllianceTechRestClient.class.getClassLoader()
-				.getResourceAsStream("cfg/creds.properties");
+		InputStream laFileServer = new FileInputStream("src/test/resources/cfg/creds.properties");
 		Properties laServerPrp = new Properties();
 		laServerPrp.load(laFileServer);
 
