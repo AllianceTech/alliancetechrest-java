@@ -1,7 +1,29 @@
 package com.alliancetech.rest;
 
-import com.alliancetech.rest.data.*;
+import com.alliancetech.rest.data.AssociationList;
+import com.alliancetech.rest.data.AssociationResponseList;
+import com.alliancetech.rest.data.AttendanceReadList;
+import com.alliancetech.rest.data.AttendanceResponseList;
+import com.alliancetech.rest.data.DefaultResponse;
+import com.alliancetech.rest.data.ImageList;
+import com.alliancetech.rest.data.MaterialsRedemptionList;
+import com.alliancetech.rest.data.MaterialsRedemptionResponseList;
+import com.alliancetech.rest.data.PersonalEventList;
+import com.alliancetech.rest.data.PersonalEventResponseList;
+import com.alliancetech.rest.data.Profile;
+import com.alliancetech.rest.data.Registrant;
+import com.alliancetech.rest.data.RegistrantList;
+import com.alliancetech.rest.data.RegistrantResponseList;
+import com.alliancetech.rest.data.RoomList;
+import com.alliancetech.rest.data.SessionList;
+import com.alliancetech.rest.data.SessionResponseList;
+import com.alliancetech.rest.data.SurveyCompletionList;
+import org.apache.http.HttpHost;
+import org.apache.http.client.HttpClient;
+import org.apache.http.conn.params.ConnRoutePNames;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -56,6 +78,45 @@ public class AllianceTechRestClient extends RestUtility {
      */
     public AllianceTechRestClient(String asUsername, String asPassword, String asHostname) {
         super(asUsername, asPassword, asHostname);
+    }
+
+    /**
+     * Set up an AT rest client that uses a proxy pass-through to the AT service.
+     * @param asUsername String
+     * @param asPassword String
+     * @param asHostname String
+     * @param aProxyUrl The URL of the proxy you plan to use as a pass-through to the service.
+     * @throws RuntimeException If aProxyURL cannot be interpreted as a valid URL.
+     */
+    public AllianceTechRestClient(String asUsername, String asPassword, String asHostname, String aProxyUrl) {
+        super(asUsername, asPassword, asHostname);
+        try {
+            HttpClient theClient = this.createHttpClient(aProxyUrl);
+            super.initializeHttpClient(theClient);
+        } catch (MalformedURLException e) {
+            throw new RuntimeException("Invalid URL: " + aProxyUrl, e);
+        }
+    }
+
+    /**
+     * Create an httpClient that uses a proxy pass-through to the service.
+     * @param aProxyUrl The URL of the proxy to use.
+     * @return An HttpClient configured to use the proxy.
+     */
+    protected HttpClient createHttpClient(String aProxyUrl) throws MalformedURLException {
+        HttpClient client = super.createHttpClient();
+
+        // Set up the proxy. If there's anything wrong with the URL, throw the Exception.
+        HttpHost proxyHttpHost = null;
+        if (UtilityMethods.isValidString(aProxyUrl)) {
+            URL proxyUrl;
+            proxyUrl = new URL(aProxyUrl);
+            proxyHttpHost = new HttpHost(proxyUrl.getHost(), proxyUrl.getPort(), proxyUrl.getProtocol());
+            client.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, proxyHttpHost);
+        } else {
+            throw new MalformedURLException("Invalid URL string: " + aProxyUrl);
+        }
+        return client;
     }
 
     /**

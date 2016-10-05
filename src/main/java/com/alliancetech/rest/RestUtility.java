@@ -29,16 +29,13 @@ public class RestUtility {
     private String csHostname;
     private String csPassword;
     private String csUsername;
+
     public RestUtility(String asHostname) {
-        this(null, null, asHostname);
-        setSocketTimeout(DEFAULT_SOCKET_TIMEOUT);
-        setConnectionTimeout(DEFAULT_CONNECTION_TIMEOUT);
+        initialize(null, null, asHostname);
     }
 
     public RestUtility(String asUsername, String asPassword, String asHostname) {
-        this(asUsername, asPassword, asHostname, null);
-        setSocketTimeout(DEFAULT_SOCKET_TIMEOUT);
-        setConnectionTimeout(DEFAULT_CONNECTION_TIMEOUT);
+        initialize(asUsername, asPassword, asHostname);
     }
 
     /**
@@ -51,10 +48,34 @@ public class RestUtility {
      */
     public RestUtility(String asUsername, String asPassword, String asHostname,
                        HttpClient aaHTTPClient) {
+        initialize(asUsername, asPassword, asHostname);
+        initializeHttpClient(aaHTTPClient);
+    }
+
+    /**
+     *
+     * @param asUsername
+     * @param asPassword
+     * @param asHostname
+     */
+    protected void initialize(String asUsername, String asPassword, String asHostname) {
         this.csUsername = asUsername;
         this.csPassword = asPassword;
         this.csHostname = asHostname;
-        this.caHTTPClient = aaHTTPClient;
+    }
+
+    /**
+     * Initializes the HttpClient. If aaHTTPClient is null, this method creates one.
+     * @param aaHTTPClient An HTTPClient to use, or null if we should create one.
+     */
+    protected void initializeHttpClient(HttpClient aaHTTPClient) {
+        if (aaHTTPClient == null) {
+            this.caHTTPClient = createHttpClient();
+            setSocketTimeout(DEFAULT_SOCKET_TIMEOUT);
+            setConnectionTimeout(DEFAULT_CONNECTION_TIMEOUT);
+        } else {
+            this.caHTTPClient = aaHTTPClient;
+        }
     }
 
     protected String addParameters(String path, Map<String, String> parameters) {
