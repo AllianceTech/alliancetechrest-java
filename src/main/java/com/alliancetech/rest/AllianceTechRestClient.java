@@ -49,6 +49,7 @@ public class AllianceTechRestClient extends RestUtility {
     public static final String RESPONSE_STATUS_ERROR = "ERROR";
     public static final String RESPONSE_STATUS_SUCCESS = "SUCCESS";
     private static final String PARAM_ENCODED_DATA = "encoded_data";
+    private static final String PARAM_EXCLUDE_TAP_N_GO = "exclude_tap_n_go";
     private static final String PARAM_ID_TYPE = "id_type";
     private static final String PARAM_LAST_MODIFIED = "last_modified";
     private static final String PARAM_MAX_SIZE = "max_size";
@@ -237,15 +238,21 @@ public class AllianceTechRestClient extends RestUtility {
      * @param aiMaxSize int Max number of results to return
      * @param asLastId  String the ID of the record to continue from
      * @param asRoom    String The name of the Room to get IDs from (Optional)
+     * @param abExcludeTapNGo    Boolean to be used to filter out tap n go reads.
      * @return AttendanceReadList
      */
-    public AttendanceReadList getAttendanceReadList(int aiMaxSize, String asLastId, String asRoom) {
+    public AttendanceReadList getAttendanceReadList(
+            int aiMaxSize, String asLastId, String asRoom, Boolean abExcludeTapNGo) {
         String lsParam = "";
         if (aiMaxSize > 0) {
             lsParam += "&max_size=" + Integer.toString(aiMaxSize);
         }
         if (UtilityMethods.isValidString(asLastId)) {
             lsParam += "&last_id=" + asLastId;
+        }
+
+        if (abExcludeTapNGo != null) {
+            lsParam += "&" + PARAM_EXCLUDE_TAP_N_GO + "=" + abExcludeTapNGo.booleanValue();
         }
 
         if (UtilityMethods.isValidString(lsParam)) {
