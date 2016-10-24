@@ -624,7 +624,7 @@ public class TestAllianceTechRestClient extends TestCase
 	public void test_AttendanceReadListGet()
 	{
 		AttendanceReadList laReadList = laClient.getAttendanceReadList(5,
-				null, null);
+				null, null, null);
 		if (laReadList.getAttendanceReadList().size() > 0)
 		{
 			for (AttendanceRead laRead : laReadList.getAttendanceReadList())
